@@ -1,7 +1,7 @@
 import random
 
 
-def modular_exponentiation(a, n, m): # works; checked
+def modular_exponentiation(a, n, m):  # works; checked
     """
     (a ^ n) mod m as computed by ourselves.
 
@@ -38,9 +38,10 @@ def jacobi(a, n):
     :param n:
     :return: (a/n)
     """
-    assert (n % 2 == 1), "Invalid input."
+    assert (n % 2 == 1), "Invalid input: n must be odd."
     if a == 1:
         return a
+    # ensuring that a < n:
     if a > n:
         a = a % n
     t = 1
@@ -55,32 +56,34 @@ def jacobi(a, n):
         if a % 4 == n % 4 == 3:
             t *= -1
         a %= n
-    if n == 1:
-        return t
-    else:
-        return 0
+    return t if n == 1 else 0
 
 
 def solovay_strassen(n, t) -> bool:
     """
+    Solovay-Strassen probabilistic primality test.
+
+    Accuracy: If the input n is indeed prime, then the output will always correctly be probably prime. However,
+    if the input n is composite then it is possible for the output to be incorrectly probably prime.
+    The number n is then called an Euler–Jacobi pseudo-prime.
 
     :param n: odd integer n ≥ 3
     :param t: security parameter t ≥ 1 (number of iterations)
     :return: true if n is prime, false otherwise
     """
-    for i in range(1, t + 1):
+    for i in range(0, t):
         # choose a at random s.t. 2 ≤ a ≤ n - 2:
         a = random.randint(2, n - 1)
         # compute r = (a ** ((n-1)/2)) mod n:
         r = modular_exponentiation(a, (n-1)//2, n)
         # if r != 1 and r!= n-1 --> n is composite
-        if r not in (1, n-1):
+        if r not in [1, n-1]:
             return False
-        # compute the Jacobi symbol j_s = (a/n)
-        j_s = jacobi(a, n)
-        # if r !≡ s mod n --> n is composite
-        if r != j_s % n:
+        # compute the Jacobi symbol s = (a/n)
+        s = jacobi(a, n)
+        # if r !≡ s mod n, then n is composite
+        if r != s % n:
             return False
-    return True  # prime
+    return True  # probably prime
 
 
