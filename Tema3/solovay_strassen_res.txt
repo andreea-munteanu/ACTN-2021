@@ -1,0 +1,6 @@
+Solovay-Strassen for 131071: Prime
+Solovay-Strassen for 131075: Composite
+Solovay-Strassen for 999999000001: Prime
+Solovay-Strassen for 99999900000707: Composite
+Solovay-Strassen for 170141183460469231731687303715884105727: Composite
+Solovay-Strassen for 5210644015679228794060694325390955853335898483908056458352183851018372555735221: Composite
