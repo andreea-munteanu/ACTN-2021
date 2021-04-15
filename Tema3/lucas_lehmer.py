@@ -51,30 +51,27 @@ def fast_exponentiation(p):
     # return (2 ** p) - 1
 
 
-def modular_reduction(s, Mn, n):
+def modular_reduction(number, mersenne, s):
     """
-    Method for implementing the modular reduction of Mersenne number 2 ** s.
+    Method for implementing the modular reduction of 'number' to the Mersenne number 2 ** s = 'mersenne'.
 
-    :param s: number
-    :param Mn: 2 ** n - 1
-    :param n:
+    :param number:
+    :param mersenne: 2 ** n - 1
+    :param s: mersenne parameter
     :return:
     """
-    s_bin = format(s, "b")
+    # get binary representation of 'number':
+    no_bin = format(number, "b")
     s0, s1 = str(), str()
-
-    if len(s_bin) <= n:
-        s0 = int(s_bin, 2)
-        s1 = 0
+    if len(no_bin) > s:
+        for _ in range(0, s):
+            s0 = no_bin[len(no_bin)-1] + s0
+            no_bin = no_bin[:-1]
+        s0, s1 = int(s0, 2), int(no_bin, 2)
     else:
-        for _ in range(0, n):
-            s0 = s_bin[len(s_bin)-1] + s0
-            s_bin = s_bin[:-1]
-        s1 = s_bin
-        s0 = int(s0, 2)
-        s1 = int(s1, 2)
-
-    return s0 + s1 if s0 + s1 < Mn else s0 + s1 - Mn
+        s0 = int(no_bin, 2)
+        s1 = 0
+    return s0 + s1 if s0 + s1 < mersenne else s0 + s1 - mersenne
 
 
 def mersenne_s(s):
