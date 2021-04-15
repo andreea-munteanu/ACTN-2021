@@ -1,4 +1,3 @@
-7: Prime
 15: Composite
 17: Prime
 19: Prime

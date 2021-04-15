@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -99,11 +100,12 @@ def solovay_strassen(n, t) -> bool:
     :return: true if n is prime, false otherwise
     """
     for i in range(0, t):
-        # choose a at random s.t. 2 ≤ a ≤ n - 2:
+        # choose a at random s.t. 2 ≤ a ≤ n - 2 and (a, n) = 1:
         a = random.randint(2, n - 1)
+        if math.gcd(a, n) != 1:
+            return False
         # compute r = (a ** ((n-1)/2)) mod n:
-        r = modular_exponentiation(a, (n-1)//2, n)
-        # r = pow(a, (n-1)//2, n)
+        r = modular_exponentiation(a, (n-1)//2, n)  # r = pow(a, (n-1)//2, n)
         # if r != 1 and r!= n-1 --> n is composite
         if r not in [1, n-1]:
             return False
@@ -113,5 +115,4 @@ def solovay_strassen(n, t) -> bool:
         if r != s % n:
             return False
     return True  # probably prime
-
 
