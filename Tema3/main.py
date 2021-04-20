@@ -28,7 +28,7 @@ if __name__ == '__main__':
         print(f'{p}: ', 'Prime' if solovay_strassen(p, 80) else 'Composite', sep='', file=file)
     file.close()
 
-    # bits = 120
+    # bits = 512
     # p = 0
     # # only run solovay-strassen for odd numbers:
     # while p % 2 == 0 or sympy.isprime(p) is False:  # making sure we get a prime number

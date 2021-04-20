@@ -35,21 +35,6 @@ def fast_exponentiation(p):
     # res -= 1
     # return res
 
-    # """
-    # Calculates b^p
-    # Complexity O(log p)
-    # """
-    # res = 1
-    # b = 2
-    # while p:
-    #     if p & 0x1: res *= b
-    #     b *= b
-    #     p >>= 1
-    #
-    # return res - 1
-    #
-    # return (2 ** p) - 1
-
 
 def modular_reduction(number, mersenne, s):
     """
