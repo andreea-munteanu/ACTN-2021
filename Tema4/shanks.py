@@ -33,12 +33,12 @@ def modular_exponentiation(a, n, m):  # works; checked
 
 def baby_steps(alpha, m, p):
     """
-    Method for constructing table with entries (j, alpha_j)
+    Method for constructing table with entries (j, alpha ** j)
 
     :param alpha: cyclic group generator
     :param m:
     :param p: odd prime
-    :return:
+    :return: table L = (j, alpha ** j)
     """
     L = []
     for j in range(0, m):
@@ -79,10 +79,18 @@ def modular_inverse(a, m):
 
 
 def giant_steps(beta, alpha, m, p):
+    """
+    Method for implementing baby-step giant-step algorithm: looking for the i indexes.
+
+    :param alpha: cyclic group generator
+    :param m:
+    :param p: odd prime
+    :return: table L = (j, alpha ** j)
+    """
     L = []
     for i in range(0, m):
-        alpha_to_minus_1 = modular_inverse(alpha, p)
-        h = (beta * modular_exponentiation(alpha_to_minus_1, m*i, p)) % p
+        alpha_inverse = modular_inverse(alpha, p)
+        h = (beta * modular_exponentiation(alpha_inverse, m*i, p)) % p
         L.append((i, h))
     return L
 
@@ -90,6 +98,7 @@ def giant_steps(beta, alpha, m, p):
 def shanks(p, beta, alpha):
     """
     Method for implementing the Shanks algorithm for computing the discrete logarithm.
+    We want to find indexes i, j s.t. pow(alpha, x) = pow(alpha, i * m + j). --> baby giant step
 
     :param p: odd prime number
     :param alpha: generator of cyclic group G
@@ -98,16 +107,16 @@ def shanks(p, beta, alpha):
     """
     m = math.floor((p - 1) ** (1/2))
 
-    L_bs = baby_steps(alpha, m, p)
-    L_gs = giant_steps(beta, alpha, m, p)
+    list_of_js = baby_steps(alpha, m, p)
+    list_of_is = giant_steps(beta, alpha, m, p)
 
     x, i, j = 0, 0, 0
 
-    for i in range(0, len(L_gs)):
-        for j in range(0, len(L_bs)):
-            if L_gs[i][1] == L_bs[j][1]:
-                i = L_gs[i][0]
-                j = L_bs[j][0]
+    for i in range(0, len(list_of_is)):
+        for j in range(0, len(list_of_js)):
+            if list_of_is[i][1] == list_of_js[j][1]:
+                i = list_of_is[i][0]
+                j = list_of_js[j][0]
                 break
 
     return i * m + j  # x

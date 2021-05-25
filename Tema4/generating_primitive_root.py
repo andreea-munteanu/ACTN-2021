@@ -34,7 +34,7 @@ def get_prime_divisors(p):  # works; checked
 # print(get_prime_divisors(100))
 
 
-def generate_alpha(p):
+def generate_alpha(p):  # apare un 0 si n-ar prea trebui
     """
     Generating α = a primitive root modulo a prime p.
     (Assume that the prime factorization of p-1 is known in advance - the simplest choice will be p = 2q +1,

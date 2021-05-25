@@ -81,9 +81,9 @@ def CRT(factorization, x_i, p):
     Method for implementing the Chinese Remainder Theorem.
     
     :param factorization: prime factorization of p: p = (p1 ** e1) * (p2 ** e2)...
-    :param x_i: 
+    :param x_i: x_i = l_0 + l_1 * q + l_2 * (q ** 2) + ...
     :param p: odd prime
-    :return: 
+    :return: chinese remainder theorem
     """
     x = 0
 
