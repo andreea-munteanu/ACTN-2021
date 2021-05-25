@@ -1,4 +1,5 @@
 import random
+
 from generating_primitive_root import get_prime_divisors, generate_alpha3
 from shanks import shanks, modular_exponentiation
 from silver_pohlig_hellman import silver_pohlig_hellman
@@ -17,10 +18,10 @@ if __name__ == '__main__':
     print(modular_exponentiation(alpha, shanks(p, beta, alpha), p))
 
     print("____________SILVER-POHLIG-HELLMAN______________")
-    p = 11
-    factorization = get_prime_divisors(p)
-    print(f'p = {p} = {factorization}')
-    print(silver_pohlig_hellman(factorization, p, alpha, beta))
+    p = 251
+    factorization = get_prime_divisors(p - 1)
+    print(f'p - 1 = {p - 1} = {factorization}')
+    print(silver_pohlig_hellman(factorization, p, 71, 210))  # should be 197
 
 
 

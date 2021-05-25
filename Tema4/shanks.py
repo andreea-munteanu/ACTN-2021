@@ -64,9 +64,11 @@ def modular_inverse(a, m):
         return 0
 
     while a > 1:
-        q = a // m
+        if m != 0:
+            q = a // m
         t = m
-        m = a % m
+        if m != 0:
+            m = a % m
         a = t
         t = y
         y = x - q * y
@@ -87,6 +89,8 @@ def giant_steps(beta, alpha, m, p):
 
 def shanks(p, beta, alpha):
     """
+    Method for implementing the Shanks algorithm for computing the discrete logarithm.
+
     :param p: odd prime number
     :param alpha: generator of cyclic group G
     :param beta: element belonging to G

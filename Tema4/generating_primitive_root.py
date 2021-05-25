@@ -26,7 +26,7 @@ def get_prime_divisors(p):  # works; checked
             while copy % prime_div == 0:
                 power += 1
                 copy /= prime_div
-            pair = (prime_div, power)
+            pair = [prime_div, power]
             divs.append(pair)
     return divs
 

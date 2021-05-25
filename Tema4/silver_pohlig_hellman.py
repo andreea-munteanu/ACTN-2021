@@ -108,9 +108,7 @@ def silver_pohlig_hellman(factorization, p, alpha, beta):
     x_i = []
     for i in range(0, len(factorization)):
         x_i.append(compute_x_i(factorization[i][0], factorization[i][1], p, alpha, beta))
-    return CRT(factorization, x_i, p - 1)  # x
+    return CRT(factorization, x_i, p)  # x
 
 
-p = 11
-factorization = get_prime_divisors(p)
-print(silver_pohlig_hellman(factorization, p, 64, 182))
+
